@@ -5,6 +5,8 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public int damage;
+    public int price;
+    public string weaponName;
     public enum Rarity { Common, Rare, Legendary }
     public Rarity rarity { get; set; }
     public Sprite sprite { get { return sprite; } set { sprite = value; } }

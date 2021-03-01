@@ -152,17 +152,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16cff6ac9ca836147b9aa6fcef71e2b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  legendaryMaxDamage: 12
-  legendaryMinDamage: 9
-  rareMaxDamage: 8
-  rareMinDamage: 5
-  commonMaxDamage: 4
-  commonMinDamage: 1
+  legendaryMaxDamage: 14
+  legendaryMinDamage: 11
+  rareMaxDamage: 10
+  rareMinDamage: 7
+  commonMaxDamage: 6
+  commonMinDamage: 3
   playerLevelMultiplier: 1
   weapon: {fileID: 854965591293915733, guid: e0000962d58724a4ba1de42ad758820c, type: 3}
   rareRate: 40
   legendaryRate: 15
   maxRate: 100
+  weaponNames:
+  - Le Stab
+  - Slicer McSlice
+  - Excaliber
 --- !u!4 &625217143
 Transform:
   m_ObjectHideFlags: 0

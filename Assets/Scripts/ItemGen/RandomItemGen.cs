@@ -20,11 +20,14 @@ public class RandomItemGen : MonoBehaviour
     [SerializeField]private int legendaryRate;
     [SerializeField]private int maxRate;
 
+    public List<string> weaponNames;
+
     private void Start()
-    {
-        GenerateRandomItem();
-        GenerateRandomItem();
-        GenerateRandomItem();
+    {        
+        for (int i = 0; i < 6; i++)
+        {
+            GenerateRandomItem();
+        }
     }
 
     private GameObject GenerateRandomItem()
@@ -37,21 +40,35 @@ public class RandomItemGen : MonoBehaviour
             int d = Random.Range(legendaryMinDamage * playerLevelMultiplier, legendaryMaxDamage * playerLevelMultiplier);
             nWeapon.GetComponent<Weapon>().damage = d;
             nWeapon.GetComponent<Weapon>().rarity = Weapon.Rarity.Legendary;
+            nWeapon.GetComponent<Weapon>().price = GeneratePrice(3, d);
+            nWeapon.GetComponent<Weapon>().weaponName = weaponNames[Random.Range(0, weaponNames.Count)];
         }
         else if (r < rareRate)
         {
             int d = Random.Range(rareMinDamage * playerLevelMultiplier, rareMinDamage * playerLevelMultiplier);
             nWeapon.GetComponent<Weapon>().damage = d;
             nWeapon.GetComponent<Weapon>().rarity = Weapon.Rarity.Rare;
+            nWeapon.GetComponent<Weapon>().price = GeneratePrice(2,d);
+            nWeapon.GetComponent<Weapon>().weaponName = weaponNames[Random.Range(0, weaponNames.Count)];
         }
         else // if rarity rate doesn't match rare or legendary, it becomes a common
         {
             int d = Random.Range(commonMinDamage * playerLevelMultiplier, commonMaxDamage * playerLevelMultiplier);
             nWeapon.GetComponent<Weapon>().damage = d;
             nWeapon.GetComponent<Weapon>().rarity = Weapon.Rarity.Common;
+            nWeapon.GetComponent<Weapon>().price = GeneratePrice(1, d);
+            nWeapon.GetComponent<Weapon>().weaponName = weaponNames[Random.Range(0, weaponNames.Count)];
         }
 
         return nWeapon;
+    }
+
+    private int GeneratePrice(int rarityMultiplier, int calDmg)
+    {        
+
+        int price = Mathf.RoundToInt(((rarityMultiplier + playerLevelMultiplier) * calDmg)/2);
+
+        return price;
     }
     
 }
