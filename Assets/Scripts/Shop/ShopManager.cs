@@ -14,24 +14,12 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Text itemName;
     [SerializeField] private Text costText;
     [SerializeField] private Button buyButton;
+    private List<int> shopItemIndexes;
     private int myCoins = 9000;
 
     void Start()
     {
-        int temp = 0;
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                currentShopItems[i, j] = _items[temp];
-                shopItemsUI[temp].GetComponent<Image>().sprite = _items[temp].itemSprite;
-                shopItemsUI[temp].name = _items[temp].itemName;
-                int otherTemp = temp;
-                shopItemsUI[temp].GetComponent<Button>().onClick.AddListener(delegate { SelectItem(otherTemp); });
-                temp++;
-            }
-        }
-
+        SetShopItems();
         buyButton.onClick.AddListener(() => BuyItem());
     }
 
@@ -40,6 +28,11 @@ public class ShopManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             Debug.Log(currentShopItems.Length);
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetShopItems();
+            SetShopItems();
         }
     }
 
@@ -53,5 +46,33 @@ public class ShopManager : MonoBehaviour
     void BuyItem() {
         if (selectedItem == null) return;
         myCoins -= selectedItem.itemCost;
+    }
+
+    public void SetShopItems() {
+        int temp = 0;
+        shopItemIndexes = new List<int>();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                int index = Random.Range(0, _items.Count);
+                while (shopItemIndexes.Contains(index)) {
+                    index = Random.Range(0, _items.Count);
+                }
+                shopItemIndexes.Add(index);
+                currentShopItems[i, j] = _items[index];
+                shopItemsUI[temp].GetComponent<Image>().sprite = _items[index].itemSprite;
+                shopItemsUI[temp].name = _items[index].itemName;
+                int otherTemp = index;
+                shopItemsUI[temp].GetComponent<Button>().onClick.AddListener(delegate { SelectItem(otherTemp); });
+                temp++;
+            }
+        }
+    }
+
+    public void ResetShopItems() {
+        for (int i = 0; i < shopItemsUI.Count; i++) {
+            shopItemsUI[i].GetComponent<Button>().onClick.RemoveAllListeners();
+            shopItemsUI[i].GetComponent<Image>().sprite = null;
+            shopItemsUI[i].name = "GameObject";
+        }
     }
 }
