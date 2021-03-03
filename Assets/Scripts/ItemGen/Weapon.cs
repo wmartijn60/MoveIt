@@ -9,5 +9,6 @@ public class Weapon : MonoBehaviour
     public string weaponName;
     public enum Rarity { Common, Rare, Legendary }
     public Rarity rarity { get; set; }
-    public Sprite sprite { get { return sprite; } set { sprite = value; } }
+    [SerializeField] private Sprite _sprite;
+    public Sprite sprite { get { return _sprite; } set { _sprite = value; } }
 }
