@@ -13,7 +13,7 @@ public class RandomItemGen : MonoBehaviour
 
     public int playerLevelMultiplier = 1;
 
-    [SerializeField]private GameObject weapon;
+    public List<GameObject> weapons;
 
     //variables for random chance
     [SerializeField]private int rareRate;
@@ -30,9 +30,9 @@ public class RandomItemGen : MonoBehaviour
         }
     }
 
-    private GameObject GenerateRandomItem()
+    public GameObject GenerateRandomItem()
     {
-        GameObject nWeapon = Instantiate(weapon, transform.position, Quaternion.identity);
+        GameObject nWeapon = Instantiate(weapons[Random.Range(0, weapons.Count)], transform.position, Quaternion.identity);
 
         int r = Random.Range(0,maxRate);
         if (r < legendaryRate)
