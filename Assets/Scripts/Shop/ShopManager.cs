@@ -17,33 +17,16 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Text costText;
     [SerializeField] private Button buyButton;
 
-    //private TempItem[,] currentShopItems = new TempItem[3,3];
     private List<int> shopItemIndexes;
     private RandomItemGen itemGen;
     private int myCoins = 9000;
-    public Sprite sprite;
 
     void Start()
     {
         itemGen = GetComponent<RandomItemGen>();
         GenerateItemPool();
-        //_weapons[3].sprite = sprite;
-        //Debug.Log(_weapons[2].weaponName);
         SetShopItems();
         buyButton.onClick.AddListener(() => BuyItem());
-    }
-
-    void Update()
-    {
-        /*if (Input.GetKeyDown(KeyCode.J))
-        {
-            Debug.Log(currentShopItems.Length);
-        }*/
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetShopItems();
-            SetShopItems();
-        }
     }
 
     public void LogThings() {
@@ -69,7 +52,7 @@ public class ShopManager : MonoBehaviour
     }
 
     void BuyItem() {
-        if (selectedWeapon == null) return;
+        if (selectedWeapon == null && selectedWeapon.weaponName == "") return;
         myCoins -= selectedWeapon.price;
     }
 
