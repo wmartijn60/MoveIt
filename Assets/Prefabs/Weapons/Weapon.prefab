@@ -95,3 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb33201172c4ab04686249f40418f6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
+  price: 0
+  weaponName: 
+  rarity: 0
+  itemSprite: {fileID: 21300000, guid: 9b79855211885734eaac8c2c3eeae1ad, type: 3}

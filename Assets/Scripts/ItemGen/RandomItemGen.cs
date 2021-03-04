@@ -24,10 +24,7 @@ public class RandomItemGen : MonoBehaviour
 
     private void Start()
     {        
-        for (int i = 0; i < 6; i++)
-        {
-            GenerateRandomItem();
-        }
+
     }
 
     public GameObject GenerateRandomItem()

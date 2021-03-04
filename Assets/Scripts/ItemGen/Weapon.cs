@@ -8,6 +8,6 @@ public class Weapon : MonoBehaviour
     public int price;
     public string weaponName;
     public enum Rarity { Common, Rare, Legendary }
-    public Rarity rarity { get; set; }
-    public Sprite sprite { get { return sprite; } set { sprite = value; } }
+    public Rarity rarity;
+    public Sprite itemSprite;
 }
