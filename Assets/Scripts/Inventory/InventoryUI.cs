@@ -7,6 +7,8 @@ using TMPro;
 public class InventoryUI : MonoBehaviour
 {
     public List<GameObject> slotItems;
+    public Image cosmeticPreview;
+    public Sprite emptySlot;
 
     [SerializeField]private Inventory Inventory;
 
@@ -14,7 +16,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]private TextMeshProUGUI itemRarity;
     [SerializeField]private TextMeshProUGUI itemPrice;
 
-    public void SelectItem(string iName, int index)
+    public void SelectWeapon(string iName, int index)
     {
         if (Inventory.weapons[index] != null)
         {
@@ -25,8 +27,33 @@ public class InventoryUI : MonoBehaviour
         
     }
 
+    public void SelectCosmetic(string iName, int index)
+    {
+        if (Inventory.cosmetics[index] != null)
+        {
+            itemName.text = Inventory.cosmetics[index].GetComponent<Cosmetic>().cosmeticName;
+            itemRarity.text = Inventory.cosmetics[index].GetComponent<Cosmetic>().rarity.ToString();
+            cosmeticPreview.sprite = Inventory.cosmetics[index].GetComponent<Cosmetic>().itemSprite;
+        }
+
+    }
+
     public void AddWeaponToSlot(int index)
     {
         slotItems[index].GetComponentsInChildren<Image>()[1].sprite = Inventory.weapons[index].GetComponent<Weapon>().itemSprite;
     }
+
+    public void AddCosmeticToSlot(int index)
+    {
+        slotItems[index].GetComponentsInChildren<Image>()[1].sprite = Inventory.cosmetics[index].GetComponent<Cosmetic>().itemSprite;
+    }
+
+    public void ResetWeaponSlotImages()
+    {
+        for (int i = 0; i < Inventory.weapons.Count; i++)
+        {
+            slotItems[i].GetComponentsInChildren<Image>()[1].sprite = emptySlot;
+        }
+    }
+
 }
