@@ -6,11 +6,11 @@ public class FightMode : MonoBehaviour
     [SerializeField] private StatSystem player;
 
     public void BossAttackPlayer() {
-        player.DealDamage(boss.CalculateDamage());
+        player.TakeDamage(boss.CalculateDamage());
     }
 
     public void PlayerAttackBoss() {
-        boss.DealDamage(player.CalculateDamage());
+        boss.TakeDamage(player.CalculateDamage());
     }
 
     public void ResetBossHealth() {

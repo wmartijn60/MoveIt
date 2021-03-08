@@ -10,7 +10,7 @@ public class StatSystem : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void DealDamage(int incommingDamage)
+    public void TakeDamage(int incommingDamage)
     {
         currentHealth -= incommingDamage;
     }
