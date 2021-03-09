@@ -4,21 +4,33 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public int coins;
+
     public List<GameObject> weapons;
     public List<GameObject> cosmetics;
 
-    [SerializeField]private InventoryUI InventoryUI;
+    [SerializeField]private InventoryUI WeaponInventoryUI;
+    [SerializeField]private InventoryUI CosmeticInventoryUI;
+    [SerializeField]private RandomItemGen RandomItemGen;
 
     private int selectedSlot;
 
     void Start()
     {
-        
+        for (int i = 0; i < 9; i++)
+        {
+            AddWeapon(RandomItemGen.GenerateRandomItem());
+        }
+        RemoveWeapons();
+        AddCosmetic(RandomItemGen.GenerateRandomCosmetic());
     }
 
     public void AddWeapon(GameObject wpn)
     {
         weapons.Add(wpn);
+        int i = weapons.Count - 1;
+        wpn.transform.parent = WeaponInventoryUI.slotItems[i].transform;
+        WeaponInventoryUI.AddWeaponToSlot(i);
     }
 
     public GameObject GetWeapon(int index)
@@ -28,12 +40,16 @@ public class Inventory : MonoBehaviour
 
     public void RemoveWeapons()
     {
+        WeaponInventoryUI.ResetWeaponSlotImages();
         weapons.Clear();
     }
 
     public void AddCosmetic(GameObject cmtc)
     {
         cosmetics.Add(cmtc);
+        int i = cosmetics.Count - 1;
+        cmtc.transform.parent = CosmeticInventoryUI.slotItems[i].transform;
+        CosmeticInventoryUI.AddCosmeticToSlot(i);
     }
 
     public GameObject GetCosmetic(int index)
@@ -43,8 +59,20 @@ public class Inventory : MonoBehaviour
 
     public void SelectWeapon(int i)
     {
-        selectedSlot = i;
-        InventoryUI.ShowItemName(weapons[i].GetComponent<Weapon>().weaponName);
+        if (i < weapons.Count)
+        {
+            selectedSlot = i;
+            WeaponInventoryUI.SelectWeapon(weapons[i].GetComponent<Weapon>().weaponName, i);
+        }        
+    }
+
+    public void SelectCosmetic(int i)
+    {
+        if (i < cosmetics.Count)
+        {
+            selectedSlot = i;
+            CosmeticInventoryUI.SelectCosmetic(cosmetics[i].GetComponent<Cosmetic>().cosmeticName, i);
+        }
     }
 
 }
