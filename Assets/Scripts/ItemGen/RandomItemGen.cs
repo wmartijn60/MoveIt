@@ -14,6 +14,7 @@ public class RandomItemGen : MonoBehaviour
     public int playerLevelMultiplier = 1;
 
     public List<GameObject> weapons;
+    public List<GameObject> cosmetics;
     public List<Sprite> weaponSprites;
 
     //variables for random chance
@@ -95,6 +96,12 @@ public class RandomItemGen : MonoBehaviour
         }
 
         return weapon;
+    }
+
+    public GameObject GenerateRandomCosmetic() {
+        GameObject nCosmetic = Instantiate(cosmetics[Random.Range(0, cosmetics.Count)], transform.position, Quaternion.identity);
+
+        return nCosmetic;
     }
 
     private int GeneratePrice(int rarityMultiplier, int calDmg)
