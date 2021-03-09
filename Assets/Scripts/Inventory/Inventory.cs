@@ -21,7 +21,6 @@ public class Inventory : MonoBehaviour
         {
             AddWeapon(RandomItemGen.GenerateRandomItem());
         }
-        RemoveWeapons();
         AddCosmetic(RandomItemGen.GenerateRandomCosmetic());
     }
 

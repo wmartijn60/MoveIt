@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    public int bossHealth = 100;
+    public int playerHealth = 50;
     public int currentHealth;
     public int levelModifier = 1;
-    public int maxDamage = 5;
-    public int minDamage = 1;
 
     public float attackDelay = 1;
 
     public bool ready;
 
+    public Weapon weapon;
     public BossFight bossFight;
+    public RandomItemGen randomItemGen;
 
     
 
@@ -22,17 +22,23 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
-        currentHealth = bossHealth * levelModifier;
+        currentHealth = playerHealth * levelModifier;
+        weapon = randomItemGen.GenerateRandomItem().GetComponent<Weapon>();
     }
 
     void Update()
     {
         if (ready && Time.time >= attackCooldown)
         {
-            bossFight.DamagePlayer(DealDamage());
+            bossFight.DamageBoss(DealDamage());
             attackCooldown = Time.time + 1f * attackDelay;
         }
 
+    }
+
+    public void SetWeapon(Weapon wpn)
+    {
+        weapon = wpn;
     }
 
     public void TakeDamage(int dmg)
@@ -42,6 +48,11 @@ public class Boss : MonoBehaviour
 
     public int DealDamage()
     {
-        return Random.Range(minDamage,maxDamage) * levelModifier;
+        return weapon.damage;
+    }
+
+    public void ActivateAblility()
+    {
+        bossFight.DamageBoss(DealDamage() * 2);
     }
 }

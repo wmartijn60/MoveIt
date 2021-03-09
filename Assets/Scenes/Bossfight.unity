@@ -208,8 +208,8 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 100
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -658,11 +658,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0501ac01025415d4887a208b0c0ec843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BossHealth: 100
-  levelModifier: 2
+  bossHealth: 100
+  currentHealth: 0
+  levelModifier: 1
   maxDamage: 5
   minDamage: 1
-  attackDelay: 1
+  attackDelay: 5
+  ready: 0
+  bossFight: {fileID: 1492128934}
 --- !u!1 &662854413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,8 +1158,8 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 100
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1609,6 +1612,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1492128933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1492128935}
+  - component: {fileID: 1492128934}
+  m_Layer: 0
+  m_Name: Bossfight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1492128934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492128933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416b2470aae9d3f41a1b82b8d9e7ca7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 2137712354}
+  Boss: {fileID: 498749121}
+  PlayerBar: {fileID: 1046572719}
+  BossBar: {fileID: 45555272}
+--- !u!4 &1492128935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492128933}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 318.17102, y: 288.61792, z: -175.3725}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1549426954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,7 +1740,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1549426957}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2137712354}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: ActivateAblility
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1549426957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2121,6 +2183,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2137712353}
   - component: {fileID: 2137712352}
+  - component: {fileID: 2137712354}
+  - component: {fileID: 2137712355}
   m_Layer: 0
   m_Name: Paul_idle
   m_TagString: Untagged
@@ -2193,3 +2257,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2137712354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137712351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ef7a71db49e53438e7e16a6a0a4de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 50
+  currentHealth: 0
+  levelModifier: 1
+  attackDelay: 3
+  ready: 0
+  weapon: {fileID: 0}
+  bossFight: {fileID: 1492128934}
+  randomItemGen: {fileID: 2137712355}
+--- !u!114 &2137712355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137712351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16cff6ac9ca836147b9aa6fcef71e2b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  legendaryMaxDamage: 14
+  legendaryMinDamage: 11
+  rareMaxDamage: 10
+  rareMinDamage: 7
+  commonMaxDamage: 6
+  commonMinDamage: 3
+  playerLevelMultiplier: 1
+  weapons:
+  - {fileID: 854965591293915733, guid: e0000962d58724a4ba1de42ad758820c, type: 3}
+  cosmetics:
+  - {fileID: 4376712071701506966, guid: 357979b97f2a60544b2870064cf28dee, type: 3}
+  rareRate: 40
+  legendaryRate: 15
+  maxRate: 100
+  weaponNames:
+  - Le Stab
+  - Slicer McSlice
+  - Excaliber
