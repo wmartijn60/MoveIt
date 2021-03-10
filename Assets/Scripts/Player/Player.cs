@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
         currentHealth -= dmg;
         if (currentHealth <= 0)
         {
+            animator.Play("Death");
             bossFight.SetFightStage(false);
         }
     }
