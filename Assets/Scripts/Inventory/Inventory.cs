@@ -14,15 +14,24 @@ public class Inventory : MonoBehaviour
     [SerializeField]private RandomItemGen RandomItemGen;
 
     private int selectedSlot;
+    void Awake() {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Inventory");
+
+        if (objs.Length > 1) {
+            Destroy(this.gameObject);
+        }
+
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     void Start()
     {
-        for (int i = 0; i < 9; i++)
+        /*for (int i = 0; i < 9; i++)
         {
             AddWeapon(RandomItemGen.GenerateRandomItem());
         }
         RemoveWeapons();
-        AddCosmetic(RandomItemGen.GenerateRandomCosmetic());
+        AddCosmetic(RandomItemGen.GenerateRandomCosmetic());*/
     }
 
     public void AddWeapon(GameObject wpn)
