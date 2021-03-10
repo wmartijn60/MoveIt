@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ShopTestScene.unity
     guid: 9f1c554eb3617d341892fee6e68dce2a
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 5539c9b9d84986c4db1f5542f69ee853
+  - enabled: 1
     path: Assets/Scenes/ShopTestSceneUIScaling.unity
     guid: f6d35056e4e5c60419fd76d2c2ec4822
-  - enabled: 1
-    path: Assets/Scenes/QRScanner.unity
-    guid: f4822060b9e187f47984c8535f36f834
   m_configObjects: {}
