@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefabs/Weapons/Weapon.prefab.meta
 guid: e0000962d58724a4ba1de42ad758820c
 PrefabImporter:
+=======
+guid: 62df2414e07b43b4d8a96b7a2a275ff5
+folderAsset: yes
+DefaultImporter:
+>>>>>>> Developer:Assets/Resources.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

@@ -40,7 +40,7 @@ public class InventoryUI : MonoBehaviour
 
     public void AddWeaponToSlot(int index)
     {
-        slotItems[index].GetComponentsInChildren<Image>()[1].sprite = Inventory.weapons[index].GetComponent<Weapon>().itemSprite;
+        slotItems[index].GetComponentsInChildren<Image>()[1].sprite = Inventory.weapons[index].GetComponent<Weapon>().sprite;
     }
 
     public void AddCosmeticToSlot(int index)
