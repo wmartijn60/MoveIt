@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
     public int coins;
 
     public List<GameObject> weapons;
+    public List<Weapon> weapons2;
     public List<GameObject> cosmetics;
 
     [SerializeField]private InventoryUI WeaponInventoryUI;
@@ -14,14 +15,24 @@ public class Inventory : MonoBehaviour
     [SerializeField]private RandomItemGen RandomItemGen;
 
     private int selectedSlot;
+    void Awake() {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Inventory");
+
+        if (objs.Length > 1) {
+            Destroy(this.gameObject);
+        }
+
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     void Start()
     {
-        for (int i = 0; i < 9; i++)
+        /*for (int i = 0; i < 9; i++)
         {
             AddWeapon(RandomItemGen.GenerateRandomItem());
         }
-        AddCosmetic(RandomItemGen.GenerateRandomCosmetic());
+        RemoveWeapons();
+        AddCosmetic(RandomItemGen.GenerateRandomCosmetic());*/
     }
 
     public void AddWeapon(GameObject wpn)
@@ -32,15 +43,31 @@ public class Inventory : MonoBehaviour
         WeaponInventoryUI.AddWeaponToSlot(i);
     }
 
+    public void AddWeapon2(Weapon wpn) {
+        weapons2.Add(wpn);
+        int i = weapons2.Count - 1;
+        //wpn.transform.parent = WeaponInventoryUI.slotItems[i].transform;
+        //WeaponInventoryUI.AddWeaponToSlot(i);
+    }
+
     public GameObject GetWeapon(int index)
     {
         return weapons[index];
+    }
+
+    public Weapon GetWeapon2(int index) {
+        return weapons2[index];
     }
 
     public void RemoveWeapons()
     {
         WeaponInventoryUI.ResetWeaponSlotImages();
         weapons.Clear();
+    }
+
+    public void RemoveWeapons2() {
+        WeaponInventoryUI.ResetWeaponSlotImages();
+        weapons2.Clear();
     }
 
     public void AddCosmetic(GameObject cmtc)

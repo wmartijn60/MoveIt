@@ -9,6 +9,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private List<GameObject> shopItemsUI;
     [SerializeField] private List<TempItem> _items;
     [SerializeField] private List<Weapon> _weapons;
+    private Inventory inventory;
     private TempItem selectedItem = null;
     private Weapon selectedWeapon = null;
 
@@ -20,7 +21,6 @@ public class ShopManager : MonoBehaviour
 
     private List<int> shopItemIndexes;
     private RandomItemGen itemGen;
-    private int myCoins = 9000;
 
     void Start()
     {
@@ -28,7 +28,15 @@ public class ShopManager : MonoBehaviour
         GenerateItemPool();
         SetShopItems();
         buyButton.onClick.AddListener(() => BuyItem());
-        myAmountofCoins.text = "Mijn munten: " + myCoins.ToString();
+        inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+        myAmountofCoins.text = inventory.coins.ToString();
+    }
+
+    private void Update() {
+        if (inventory == null) {
+            inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+            myAmountofCoins.text = inventory.coins.ToString();
+        }
     }
 
     public void LogThings() {
@@ -50,13 +58,14 @@ public class ShopManager : MonoBehaviour
         selectedWeapon = _weapons[index];
         selectedItemImage.sprite = selectedWeapon.sprite;
         itemName.text = selectedWeapon.weaponName;
-        costText.text = selectedWeapon.price.ToString() + " munten";
+        costText.text = selectedWeapon.price.ToString();
     }
 
     void BuyItem() {
         if (selectedWeapon == null && selectedWeapon.weaponName == "") return;
-        myCoins -= selectedWeapon.price;
-        myAmountofCoins.text = "Mijn munten: " + myCoins.ToString();
+        inventory.coins -= selectedWeapon.price;
+        myAmountofCoins.text = inventory.coins.ToString();
+        inventory.AddWeapon2(selectedWeapon);
     }
 
     public void SetShopItems() {
