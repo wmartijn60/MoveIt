@@ -56,6 +56,10 @@ public class Player : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         currentHealth -= dmg;
+        if (currentHealth <= 0)
+        {
+            bossFight.SetFightStage(false);
+        }
     }
 
     public void DealDamage()

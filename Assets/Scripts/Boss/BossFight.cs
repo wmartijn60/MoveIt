@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class BossFight : MonoBehaviour
 {
-
     public Player Player;
     public Boss Boss;
 
