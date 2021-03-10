@@ -9,6 +9,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private List<GameObject> shopItemsUI;
     [SerializeField] private List<TempItem> _items;
     [SerializeField] private List<Weapon> _weapons;
+    [SerializeField] private Inventory inventory;
     private TempItem selectedItem = null;
     private Weapon selectedWeapon = null;
 
@@ -57,6 +58,7 @@ public class ShopManager : MonoBehaviour
         if (selectedWeapon == null && selectedWeapon.weaponName == "") return;
         myCoins -= selectedWeapon.price;
         myAmountofCoins.text = "Mijn munten: " + myCoins.ToString();
+        inventory.AddWeapon2(selectedWeapon);
     }
 
     public void SetShopItems() {
