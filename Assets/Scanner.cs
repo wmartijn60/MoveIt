@@ -18,7 +18,7 @@ public class Scanner : MonoBehaviour
     {
         foreach (WebCamDevice cam in WebCamTexture.devices)
         {
-            if (!cam.isFrontFacing)
+            if (cam.isFrontFacing)
             {
                 backCam = new WebCamTexture(cam.name, Screen.width, Screen.height);
                 backCam.Play();
@@ -34,7 +34,7 @@ public class Scanner : MonoBehaviour
         if (camReady)
         {
             // Orientation.
-            GetComponent<RawImage>().rectTransform.localScale = new Vector3(1f, backCam.videoVerticallyMirrored ? -1.0f : 1.0f, 1f);
+            GetComponent<RawImage>().rectTransform.localScale = new Vector3(2f, backCam.videoVerticallyMirrored ? -1.0f : 1.0f, 1f);
             GetComponent<RawImage>().rectTransform.localEulerAngles = new Vector3(0, 0, -backCam.videoRotationAngle);
 
             // Scan.
