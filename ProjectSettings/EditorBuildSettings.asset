@@ -5,22 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/ShopTestScene.unity
-    guid: 9f1c554eb3617d341892fee6e68dce2a
-  - enabled: 0
-    path: Assets/Scenes/ShopTestSceneUIScaling.unity
-    guid: f6d35056e4e5c60419fd76d2c2ec4822
-  - enabled: 0
-    path: Assets/Scenes/QrScanplz.unity
-    guid: f0e0df792320b4b41a7c9431a3af4b96
-  - enabled: 0
-    path: Assets/Scenes/QRScanner.unity
-    guid: f4822060b9e187f47984c8535f36f834
-  - enabled: 0
-    path: Assets/Scenes/WorkingQRScan.unity
-    guid: 0f626c7818c4724418eff0b4fe3106a4
   - enabled: 1
     path: Assets/Scenes/NewQR.unity
     guid: 14db40ee466af9e40878ae8de96c3aea
+  - enabled: 1
+    path: Assets/Scenes/ShopTestSceneUIScaling.unity
+    guid: f6d35056e4e5c60419fd76d2c2ec4822
   m_configObjects: {}
