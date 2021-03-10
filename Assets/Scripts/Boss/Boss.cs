@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class Boss : MonoBehaviour
 {
@@ -16,21 +17,22 @@ public class Boss : MonoBehaviour
 
     public BossFight bossFight;
 
-    
+    public Animator animator;
 
     private float attackCooldown;
 
     void Start()
     {
         currentHealth = bossHealth * levelModifier;
+        attackCooldown = Time.time + 1f * attackDelay;
     }
 
     void Update()
     {
         if (ready && Time.time >= attackCooldown)
-        {
-            bossFight.DamagePlayer(DealDamage());
+        {            
             attackCooldown = Time.time + 1f * attackDelay;
+            PlayAttack();
         }
 
     }
@@ -38,10 +40,21 @@ public class Boss : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         currentHealth -= dmg;
+        if (currentHealth <= 0)
+        {
+            animator.Play("Death");
+            bossFight.SetFightStage(false);            
+        }
     }
 
-    public int DealDamage()
+    public void DealDamage()
     {
-        return Random.Range(minDamage,maxDamage) * levelModifier;
+        bossFight.DamagePlayer(Random.Range(minDamage, maxDamage) * levelModifier);
     }
+
+    public void PlayAttack()
+    {
+        animator.Play("Attack1");
+    }
+
 }
