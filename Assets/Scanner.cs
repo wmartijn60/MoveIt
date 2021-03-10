@@ -10,7 +10,7 @@ public class Scanner : MonoBehaviour
     private bool camReady;
     private WebCamTexture backCam;
     private Inventory inventory;
-    public TextMeshProUGUI text;
+    public Text text;
     private float waitTime = 2f;
     private float currentTime;
     #endregion

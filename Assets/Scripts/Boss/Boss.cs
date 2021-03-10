@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
+
 public class Boss : MonoBehaviour
 {
     public int bossHealth = 100;
@@ -20,6 +21,8 @@ public class Boss : MonoBehaviour
     public Animator animator;
 
     private float attackCooldown;
+
+    [SerializeField] private SceneSwitcher sceneSwitcher;
 
     void Start()
     {
@@ -43,7 +46,8 @@ public class Boss : MonoBehaviour
         if (currentHealth <= 0)
         {
             animator.Play("Death");
-            bossFight.SetFightStage(false);            
+            bossFight.SetFightStage(false);
+           sceneSwitcher.Invoke("Switchscene", 1f);
         }
     }
 

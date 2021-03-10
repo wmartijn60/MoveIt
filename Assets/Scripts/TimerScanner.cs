@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class TimerScanner : MonoBehaviour
 {
-    public TextMeshProUGUI text;
+    [SerializeField] private float endTime = 200f;
+
+    public Text text;
     [SerializeField] private SceneSwitcher sceneSwitcher;
     private float startTime;
-    private float endTime = 200f;
+    
 
     void Start()
     {

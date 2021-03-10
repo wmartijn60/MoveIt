@@ -13,6 +13,7 @@ public class RandomItemGen : MonoBehaviour
 
     public int playerLevelMultiplier = 1;
 
+    public List<Sprite> weaponSprites;
     public List<GameObject> weapons;
     public List<GameObject> cosmetics;
 
@@ -22,6 +23,7 @@ public class RandomItemGen : MonoBehaviour
     [SerializeField]private int maxRate;
 
     public List<string> weaponNames;
+        
 
     private void Start()
     {        
@@ -75,5 +77,41 @@ public class RandomItemGen : MonoBehaviour
 
         return price;
     }
-    
+    public Weapon GenerateRandomItem2()
+    {
+        //GameObject nWeapon = Instantiate(weapons[Random.Range(0, weapons.Count)], transform.position, Quaternion.identity);
+        Weapon weapon = new Weapon();
+
+        int r = Random.Range(0, maxRate);
+        if (r < legendaryRate)
+        {
+            int d = Random.Range(legendaryMinDamage * playerLevelMultiplier, legendaryMaxDamage * playerLevelMultiplier);
+            weapon.damage = d;
+            weapon.rarity = Weapon.Rarity.Legendary;
+            weapon.price = GeneratePrice(3, d);
+            weapon.weaponName = weaponNames[Random.Range(0, weaponNames.Count)];
+            weapon.sprite = weaponSprites[Random.Range(0, weaponSprites.Count)];
+        }
+        else if (r < rareRate)
+        {
+            int d = Random.Range(rareMinDamage * playerLevelMultiplier, rareMinDamage * playerLevelMultiplier);
+            weapon.damage = d;
+            weapon.rarity = Weapon.Rarity.Rare;
+            weapon.price = GeneratePrice(2, d);
+            weapon.weaponName = weaponNames[Random.Range(0, weaponNames.Count)];
+            weapon.sprite = weaponSprites[Random.Range(0, weaponSprites.Count)];
+        }
+        else // if rarity rate doesn't match rare or legendary, it becomes a common
+        {
+            int d = Random.Range(commonMinDamage * playerLevelMultiplier, commonMaxDamage * playerLevelMultiplier);
+            weapon.damage = d;
+            weapon.rarity = Weapon.Rarity.Common;
+            weapon.price = GeneratePrice(1, d);
+            weapon.weaponName = weaponNames[Random.Range(0, weaponNames.Count)];
+            weapon.sprite = weaponSprites[Random.Range(0, weaponSprites.Count)];
+        }
+
+        return weapon;
+    }
+
 }
